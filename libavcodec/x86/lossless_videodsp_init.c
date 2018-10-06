@@ -57,29 +57,29 @@ static void add_median_pred_cmov(uint8_t *dst, const uint8_t *top,
     int l  = *left     & 0xff;
     int tl = *left_top & 0xff;
     int t;
-    __asm__ volatile (
-        "mov          %7, %3            \n"
-        "1:                             \n"
-        "movzbl (%3, %4), %2            \n"
-        "mov          %2, %k3           \n"
-        "sub         %b1, %b3           \n"
-        "add         %b0, %b3           \n"
-        "mov          %2, %1            \n"
-        "cmp          %0, %2            \n"
-        "cmovg        %0, %2            \n"
-        "cmovg        %1, %0            \n"
-        "cmp         %k3, %0            \n"
-        "cmovg       %k3, %0            \n"
-        "mov          %7, %3            \n"
-        "cmp          %2, %0            \n"
-        "cmovl        %2, %0            \n"
-        "add    (%6, %4), %b0           \n"
-        "mov         %b0, (%5, %4)      \n"
-        "inc          %4                \n"
-        "jl           1b                \n"
-        : "+&q"(l), "+&q"(tl), "=&r"(t), "=&q"(x), "+&r"(w2)
-        : "r"(dst + w), "r"(diff + w), "rm"(top + w)
-    );
+//     __asm__ volatile (
+//         "mov          %7, %3            \n"
+//         "1:                             \n"
+//         "movzbl (%3, %4), %2            \n"
+//         "mov          %2, %k3           \n"
+//         "sub         %b1, %b3           \n"
+//         "add         %b0, %b3           \n"
+//         "mov          %2, %1            \n"
+//         "cmp          %0, %2            \n"
+//         "cmovg        %0, %2            \n"
+//         "cmovg        %1, %0            \n"
+//         "cmp         %k3, %0            \n"
+//         "cmovg       %k3, %0            \n"
+//         "mov          %7, %3            \n"
+//         "cmp          %2, %0            \n"
+//         "cmovl        %2, %0            \n"
+//         "add    (%6, %4), %b0           \n"
+//         "mov         %b0, (%5, %4)      \n"
+//         "inc          %4                \n"
+//         "jl           1b                \n"
+//         : "+&q"(l), "+&q"(tl), "=&r"(t), "=&q"(x), "+&r"(w2)
+//         : "r"(dst + w), "r"(diff + w), "rm"(top + w)
+//     );
     *left     = l;
     *left_top = tl;
 }
